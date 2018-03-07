@@ -6,27 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.gs.algorithmtest.MainActivity">
-
-    <Button
-        android:id="@+id/bt_sort"
+    tools:context="com.gs.algorithmtest.sort.SortActivity">
+    <TextView
+        android:id="@+id/tv_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="排序"/>
+        android:textColor="@color/CORAL"
+        android:textSize="18sp"/>
     <Button
-        android:id="@+id/bt_search"
+        android:id="@+id/bt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="查找"/>
-    <Button
-        android:id="@+id/bt_tree"
+        android:text="冒泡排序"/>
+    <TextView
+        android:id="@+id/tv_list_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="树"/>
-    <Button
-        android:id="@+id/bt_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="图"/>
-
+        android:textColor="@color/GREEN"
+        android:textSize="18sp"/>
 </LinearLayout>
