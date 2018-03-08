@@ -18,6 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="冒泡排序"/>
+    <Button
+        android:id="@+id/bt_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速排序"/>
     <TextView
         android:id="@+id/tv_list_sort"
         android:layout_width="wrap_content"
