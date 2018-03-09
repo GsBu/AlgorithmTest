@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gs.algorithmtest.R;
+import com.gs.algorithmtest.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +37,15 @@ public class SortActivity extends AppCompatActivity
         tvListSort = (TextView) findViewById(R.id.tv_list_sort);
         bt1 = (Button)findViewById(R.id.bt_1);
         bt2 = (Button)findViewById(R.id.bt_2);
+        bt3 = (Button)findViewById(R.id.bt_3);
 
         bt1.setOnClickListener(this);
         bt2.setOnClickListener(this);
+        bt3.setOnClickListener(this);
     }
 
     private void initData(){
-        mData = new int[]{56, 34, 57, 23, 78, 1, 37, 6, 3, 2, 9};
+        mData = new int[]{56, 34, 56, 23, 78, 1, 37, 6, 3, 2, 9};
         StringBuffer stringBuffer = new StringBuffer("排序前:");
         for (int i : mData){
             stringBuffer.append(i + ", ");
@@ -73,6 +76,9 @@ public class SortActivity extends AppCompatActivity
                 break;
             case R.id.bt_2:
                 quickSort(0, mData.length - 1);
+                break;
+            case R.id.bt_3:
+                insertSort();
                 break;
             default:
                 break;
@@ -183,5 +189,70 @@ public class SortActivity extends AppCompatActivity
             quickSort(i + 1, r);
         }
 
+    }
+
+    /**
+     * 插入排序由于操作不尽相同, 可分为 直接插入排序 ,
+     * 折半插入排序(又称二分插入排序), 链表插入排序 , 希尔排序 。
+     * 我们先来看下直接插入排序。
+     * 直接插入排序的基本思想是：将数组中的所有元素依次跟前面已经排好的元素相比较，
+     * 如果选择的元素比已排序的元素小，则交换，直到全部元素都比较过为止。
+     *
+     * 如果比较操作的代价比交换操作大的话，可以采用二分查找法来减少比较操作的数目。
+     * 该算法可以认为是插入排序的一个变种，称为二分查找插入排序。
+     *
+     * 直接插入排序复杂度如下：
+     * 平均时间复杂度	最好情况	最坏情况	空间复杂度
+     * O(n²)	    O(n²)	O(n²)	O(1)
+     * Tips: 由于直接插入排序每次只移动一个元素的位，
+     * 并不会改变值相同的元素之间的排序， 因此它是一种稳定排序。
+     */
+    private void insertSort(){
+        ToastUtil.showToastShort(this, "直接插入排序");
+        int i, j, k;
+        //++++++++++++++ 方法一 ++++++++++++++
+        // 设数组为a[0…n-1]。
+        // 1.初始时，a[0]自成1个有序区，无序区为a[1..n-1]。令i=1
+        // 2.将a[i]并入当前的有序区a[0…i-1]中形成a[0…i]的有序区间。
+        // 3.i++并重复第二步直到i==n-1。排序完成。
+        for(i = 1; i < mData.length; i++){
+            //为a[i]在前面的a[0...i-1]有序区间中找一个合适的位置
+            for(j = i - 1; j >= 0; j--){
+                if(mData[j] <= mData[i]){
+                    break;
+                }
+            }
+            //如找到了一个合适的位置
+            if(j != i - 1){
+                //将比a[i]大的数据向后移
+                int temp = mData[i];
+                for (k = i - 1; k > j; k--){
+                    mData[k + 1] = mData [k];
+                }
+                //将a[i]放到正确位置上
+                mData[k + 1] = temp;
+            }
+        }
+        //-------------- 方法一 --------------
+
+        //++++++++++++++ 方法二 ++++++++++++++
+        // 这样的代码太长了，不够清晰。现在进行一下改写，
+        // 将搜索和数据后移这二个步骤合并。
+        // 即每次a[i]先和前面一个数据a[i-1]比较，
+        // 如果a[i] > a[i-1]说明a[0…i]也是有序的，无须调整。
+        // 否则就令j=i-1,temp=a[i]。
+        // 然后一边将数据a[j]向后移动一边向前搜索，
+        // 当有数据a[j]<a[i]时停止并将temp放到a[j + 1]处。
+        i = 0; j = 0;
+        for(i = 1; i < mData.length; i++){
+            if(mData[i - 1] > mData[i]) {
+                int temp = mData[i];
+                for (j = i - 1; j >= 0 && mData[j] > temp; j--) {
+                        mData[j + 1] = mData[j];
+                }
+                mData[j + 1] = temp;
+            }
+        }
+        //-------------- 方法二 --------------
     }
 }
