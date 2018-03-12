@@ -38,10 +38,20 @@ public class SortActivity extends AppCompatActivity
         bt1 = (Button)findViewById(R.id.bt_1);
         bt2 = (Button)findViewById(R.id.bt_2);
         bt3 = (Button)findViewById(R.id.bt_3);
+        bt4 = (Button)findViewById(R.id.bt_4);
+        bt5 = (Button)findViewById(R.id.bt_5);
+        bt6 = (Button)findViewById(R.id.bt_6);
+        bt7 = (Button)findViewById(R.id.bt_7);
+        bt8 = (Button)findViewById(R.id.bt_8);
 
         bt1.setOnClickListener(this);
         bt2.setOnClickListener(this);
         bt3.setOnClickListener(this);
+        bt4.setOnClickListener(this);
+        bt5.setOnClickListener(this);
+        bt6.setOnClickListener(this);
+        bt7.setOnClickListener(this);
+        bt8.setOnClickListener(this);
     }
 
     private void initData(){
@@ -79,6 +89,21 @@ public class SortActivity extends AppCompatActivity
                 break;
             case R.id.bt_3:
                 insertSort();
+                break;
+            case R.id.bt_4:
+                shellSort();
+                break;
+            case R.id.bt_5:
+
+                break;
+            case R.id.bt_6:
+
+                break;
+            case R.id.bt_7:
+
+                break;
+            case R.id.bt_8:
+
                 break;
             default:
                 break;
@@ -251,6 +276,60 @@ public class SortActivity extends AppCompatActivity
                         mData[j + 1] = mData[j];
                 }
                 mData[j + 1] = temp;
+            }
+        }
+        //-------------- 方法二 --------------
+    }
+
+    /**
+     * 希尔排序的实质就是分组插入排序，该方法又称缩小增量排序。
+     * 该方法的基本思想是：先将整个待排元素序列分割成
+     * 若干个子序列（由相隔某个“增量”的元素组成的）分别进行直接插入排序，
+     * 然后依次缩减增量再进行排序，待整个序列中的元素基本有序（增量足够小）时，
+     * 再对全体元素进行一次直接插入排序。
+     * 因为直接插入排序在元素基本有序的情况下（接近最好情况），效率是很高的。
+     * 以下是希尔排序复杂度:
+     * 平均时间复杂度	最好情况	    最坏情况	    空间复杂度
+     * O(n*log₂n)	O(n*log₂n)	O(n*log₂n)	O(1)
+     */
+    private void shellSort(){
+        ToastUtil.showToastShort(this, "Shell排序");
+        int i, j, gap;
+        //++++++++++++++ 方法一 ++++++++++++++
+        for (gap = mData.length / 2; gap > 0; gap /= 2){//步长
+            for (i = 0; i < gap; i++){//直接插入排序
+                for (j = i + gap; j < mData.length; j += gap){
+                    if(mData[j] < mData[j - gap]){
+                        int temp = mData[j];
+                        int k = j - gap;
+                        while (k >= 0 && mData[k] > temp){
+                            mData[k + gap] = mData[k];
+                            k -= gap;
+                        }
+                        mData[k + gap] = temp;
+                    }
+                }
+            }
+        }
+        //-------------- 方法一 --------------
+
+        //++++++++++++++ 方法二 ++++++++++++++
+        // 以第二次排序为例，原来是每次从1A到1E，从2A到2E，
+        // 可以改成从1B开始，先和1A比较，然后取2B与2A比较，
+        // 再取1C与前面自己组内的数据比较…….。
+        // 这种每次从数组第gap个元素开始，
+        // 每个元素与自己组内的数据进行直接插入排序显然也是正确的。
+        for (gap = mData.length / 2; gap > 0; gap /= 2) {
+            for (j = gap; j < mData.length; j++) {    //从数组第gap个元素开始
+                if (mData[j] < mData[j - gap]) {     //每个元素与自己组内的数据进行直接插入排序
+                    int temp = mData[j];
+                    int k = j - gap;
+                    while (k >= 0 && mData[k] > temp) {
+                        mData[k + gap] = mData[k];
+                        k -= gap;
+                    }
+                    mData[k + gap] = temp;
+                }
             }
         }
         //-------------- 方法二 --------------

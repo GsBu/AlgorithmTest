@@ -28,6 +28,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="直接插入排序"/>
+    <Button
+        android:id="@+id/bt_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shell排序"/>
+    <Button
+        android:id="@+id/bt_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="简单选择排序"/>
+    <Button
+        android:id="@+id/bt_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="堆排序"/>
+    <Button
+        android:id="@+id/bt_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="归并排序"/>
+    <Button
+        android:id="@+id/bt_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="基数排序"/>
     <TextView
         android:id="@+id/tv_list_sort"
         android:layout_width="wrap_content"
