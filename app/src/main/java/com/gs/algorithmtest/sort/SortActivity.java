@@ -94,7 +94,7 @@ public class SortActivity extends AppCompatActivity
                 shellSort();
                 break;
             case R.id.bt_5:
-
+                selectSort();
                 break;
             case R.id.bt_6:
 
@@ -333,5 +333,46 @@ public class SortActivity extends AppCompatActivity
             }
         }
         //-------------- 方法二 --------------
+    }
+
+    /**
+     * 选择排序的思想其实和冒泡排序有点类似，都是在一次排序后把最小的元素放到最前面。
+     * 但是过程不同，冒泡排序是通过相邻的比较和交换。而选择排序是通过对整体的选择。
+     * 举个栗子，对5,3,8,6,4这个无序序列进行简单选择排序，首先要选择5以外的最小数来和5交换，
+     * 也就是选择3和5交换，一次排序后就变成了3,5,8,6,4.
+     * 对剩下的序列一次进行选择和交换，最终就会得到一个有序序列。
+     * 其实选择排序可以看成冒泡排序的优化，因为其目的相同，
+     * 只是选择排序只有在确定了最小数的前提下才进行交换，
+     * 大大减少了交换的次数。选择排序的时间复杂度为O(n²)
+     *
+     * 设数组为a[0…n-1]。
+     * 1.初始时，数组全为无序区为a[0..n-1]。令i=0
+     * 2.在无序区a[i…n-1]中选取一个最小的元素，将其与a[i]交换。交换之后a[0…i]就形成了一个有序区。
+     * 3.i++并重复第二步直到i==n-1。排序完成。
+     *
+     * 以下是选择排序复杂度:
+     * 平均时间复杂度	最好情况	最坏情况	空间复杂度
+     * O(n²)	    O(n²)	O(n²)	O(1)
+     * 选择排序的简单和直观名副其实，这也造就了它”出了名的慢性子”，
+     * 无论是哪种情况，哪怕原数组已排序完成，它也将花费将近n²/2次遍历来确认一遍。
+     * 即便是这样，它的排序结果也还是不稳定的。
+     */
+    private void selectSort(){
+        ToastUtil.showToastShort(this, "简单选择排序");
+
+        int i, j, index;
+        for(i = 0; i < mData.length; i++){
+            index = i;
+            for (j = i + 1; j < mData.length; j++){
+                if(mData[j] < mData[index]){
+                    index = j;
+                }
+            }
+            if(index != i) {
+                int temp = mData[index];
+                mData[index] = mData[i];
+                mData[i] = temp;
+            }
+        }
     }
 }
